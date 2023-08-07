@@ -1,7 +1,9 @@
 package br.com.allan.medStar.api.controller;
 
-import br.com.allan.medStar.api.medico.DadosMedico;
+import br.com.allan.medStar.api.medico.DadosCadastroMedico;
+import br.com.allan.medStar.api.medico.Medico;
 import br.com.allan.medStar.api.medico.MedicoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,7 @@ public class MedicoController {
     private MedicoRepository repository;
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosMedico dadosMedico) {
-        System.out.println(dadosMedico);
+    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dadosCadastroMedico) {
+        repository.save(new Medico(dadosCadastroMedico));
     }
 }
