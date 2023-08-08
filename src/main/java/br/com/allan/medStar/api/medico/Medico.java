@@ -2,10 +2,8 @@ package br.com.allan.medStar.api.medico;
 
 import br.com.allan.medStar.api.endereco.Endereco;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.apache.commons.lang3.builder.ToStringSummary;
 
 @Table(name="medicos")
 @Entity(name="Medico")
@@ -17,9 +15,15 @@ public class Medico {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ToString.Include
     private String nome;
+
+    @ToString.Include
     private String email;
     private String telefone;
+
+    @ToString.Include
     private String crm;
 
     @Enumerated(EnumType.STRING)
