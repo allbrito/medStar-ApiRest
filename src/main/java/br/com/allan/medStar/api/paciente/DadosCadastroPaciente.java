@@ -2,7 +2,7 @@ package br.com.allan.medStar.api.paciente;
 
 import br.com.allan.medStar.api.endereco.DadosEndereco;
 
-public record DadosCadastroPacientes(
+public record DadosCadastroPaciente(
 
         String nome,
         String email,
