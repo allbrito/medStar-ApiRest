@@ -3,15 +3,14 @@ package br.com.allan.medStar.api.medico;
 import br.com.allan.medStar.api.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.commons.lang3.builder.ToStringSummary;
 
-@Table(name="medicos")
-@Entity(name="Medico")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="id")
-public class Medico {
+@Table(name="medicos")
+@Entity(name="Medico")
+public class MedicoEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +26,7 @@ public class Medico {
     private Endereco endereco;
     private boolean ativo;
 
-    public Medico(DadosCadastroMedico dados) {
+    public MedicoEntity(DadosCadastroMedico dados) {
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
