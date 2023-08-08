@@ -15,15 +15,9 @@ public class Medico {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ToString.Include
     private String nome;
-
-    @ToString.Include
     private String email;
     private String telefone;
-
-    @ToString.Include
     private String crm;
 
     @Enumerated(EnumType.STRING)
