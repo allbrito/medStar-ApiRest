@@ -47,4 +47,13 @@ public class MedicoController {
             medico.atualizarInformacoes(dados);
         }
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void Inativar(@PathVariable Long id) {
+        if (repository.existsById(id)) {
+            var medico = repository.getReferenceById(id);
+            medico.inativar();
+        }
+    }
 }
