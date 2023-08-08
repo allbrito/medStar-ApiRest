@@ -28,5 +28,5 @@ public record DadosCadastroMedico(
 
         @NotNull
         @Valid
-        DadosEndereco endereco /*alterar depois o nome para "DadosEndereco"*/) {
+        DadosEndereco endereco) {
 }
