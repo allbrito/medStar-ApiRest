@@ -27,7 +27,6 @@ public class PacienteController {
         repository.save(paciente);
 
         var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
-
         return ResponseEntity.created(uri).body(new DadosCompletosPaciente(paciente));
     }
 
@@ -58,6 +57,14 @@ public class PacienteController {
         return ResponseEntity.ok(listPage);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosCompletosPaciente> buscar(@PathVariable Long id){
+        if (!repository.existsById(id)) return ResponseEntity.notFound().build();
+
+        var paciente = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosCompletosPaciente(paciente));
+    }
+
     @PutMapping(path = "/{id}")
     @Transactional
     public ResponseEntity atualizar(@PathVariable @Valid Long id, @RequestBody @Valid DadosAtualizacaoPaciente dados) {
@@ -67,7 +74,6 @@ public class PacienteController {
 
             return ResponseEntity.ok(new DadosCompletosPaciente(paciente));
         }
-
         return ResponseEntity.notFound().build();
     }
 

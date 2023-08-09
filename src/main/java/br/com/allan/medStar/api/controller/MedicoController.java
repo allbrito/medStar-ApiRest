@@ -1,6 +1,7 @@
 package br.com.allan.medStar.api.controller;
 
 import br.com.allan.medStar.api.medico.*;
+import br.com.allan.medStar.api.paciente.DadosCompletosPaciente;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,6 +57,14 @@ public class MedicoController {
         var listPage = repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
 
         return ResponseEntity.ok(listPage);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosCompletosMedico> buscar(@PathVariable Long id){
+        if (!repository.existsById(id)) return ResponseEntity.notFound().build();
+
+        var medico = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosCompletosMedico(medico));
     }
 
     @PutMapping(path = "/{id}")
