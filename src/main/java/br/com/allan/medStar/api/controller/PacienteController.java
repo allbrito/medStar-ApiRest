@@ -35,4 +35,12 @@ public class PacienteController {
             paciente.atualizarInformacoes(dados);
         }
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void Inativar(@PathVariable Long id) {
+        if (repository.existsById(id)) {
+            repository.getReferenceById(id).inativar();
+        }
+    }
 }
