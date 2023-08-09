@@ -13,15 +13,15 @@ public record DadosCadastroPaciente(
         String nome,
 
         @NotBlank
+        @Pattern(regexp = "\\d{11}")
+        String cpf,
+
+        @NotBlank
         @Email
         String email,
 
         @NotBlank
         String telefone,
-
-        @NotBlank
-        @Pattern(regexp = "\\d{11}")
-        String cpf,
 
         @NotNull
         @Valid

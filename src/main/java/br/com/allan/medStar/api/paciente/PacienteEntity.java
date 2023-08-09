@@ -18,18 +18,18 @@ public class PacienteEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
+    private String cpf;
     private String email;
     private String telefone;
-    private String cpf;
 
     @Embedded
     private Endereco endereco;
 
     public PacienteEntity(DadosCadastroPaciente dados) {
         this.nome = dados.nome();
+        this.cpf = dados.cpf();
         this.email = dados.email();
         this.telefone = dados.telefone();
-        this.cpf = dados.cpf();
         this.endereco = new Endereco(dados.endereco());
     }
 }
