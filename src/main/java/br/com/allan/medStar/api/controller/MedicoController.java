@@ -58,8 +58,7 @@ public class MedicoController {
     @Transactional
     public void Inativar(@PathVariable Long id) {
         if (repository.existsById(id)) {
-            var medico = repository.getReferenceById(id);
-            medico.inativar();
+            repository.getReferenceById(id).inativar();
         }
     }
 }
