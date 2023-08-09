@@ -1,9 +1,6 @@
 package br.com.allan.medStar.api.controller;
 
-import br.com.allan.medStar.api.paciente.DadosCadastroPaciente;
-import br.com.allan.medStar.api.paciente.DadosListagemPaciente;
-import br.com.allan.medStar.api.paciente.PacienteEntity;
-import br.com.allan.medStar.api.paciente.PacienteRepository;
+import br.com.allan.medStar.api.paciente.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,5 +25,14 @@ public class PacienteController {
     @GetMapping
     public Page<DadosListagemPaciente> listar(@PageableDefault(size = 20, sort = {"nome"}) Pageable paginacao) {
         return repository.findAll(paginacao).map(DadosListagemPaciente::new);
+    }
+
+    @PutMapping(path = "/{id}")
+    @Transactional
+    public void atualizar(@PathVariable @Valid Long id, @RequestBody @Valid DadosAtualizacaoPaciente dados) {
+        if (repository.existsById(id)) {
+            var paciente = repository.getReferenceById(id);
+            paciente.atualizarInformacoes(dados);
+        }
     }
 }
