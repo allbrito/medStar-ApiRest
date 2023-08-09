@@ -4,7 +4,7 @@ import br.com.allan.medStar.api.endereco.DadosEndereco;
 
 public record DadosAtualizaoMedico(
 
-        String nome,
+        String email,
         String telefone,
         DadosEndereco endereco) {
 }
