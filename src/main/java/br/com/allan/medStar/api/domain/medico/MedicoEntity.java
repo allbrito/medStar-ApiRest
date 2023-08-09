@@ -1,42 +1,43 @@
-package br.com.allan.medStar.api.paciente;
+package br.com.allan.medStar.api.domain.medico;
 
-import br.com.allan.medStar.api.endereco.Endereco;
+import br.com.allan.medStar.api.domain.endereco.Endereco;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="id")
-@Table(name = "pacientes")
-@Entity(name="Paciente")
-public class PacienteEntity {
+@Table(name="medicos")
+@Entity(name="Medico")
+public class MedicoEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nome;
-    private String cpf;
     private String email;
     private String telefone;
+    private String crm;
+
+    @Enumerated(EnumType.STRING)
+    private Especialidade especialidade;
 
     @Embedded
     private Endereco endereco;
-    private Boolean ativo;
+    private boolean ativo;
 
-    public PacienteEntity(DadosCadastroPaciente dados) {
+    public MedicoEntity(DadosCadastroMedico dados) {
         this.nome = dados.nome();
-        this.cpf = dados.cpf();
         this.email = dados.email();
         this.telefone = dados.telefone();
+        this.crm = dados.crm();
+        this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
         this.ativo = true;
     }
 
-    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
-        if(dados.email() != null) this.email = dados.email();
+    public void atualizarInformacoes(DadosAtualizaoMedico dados) {
+        if(dados.email() != null) this.telefone = dados.email();
 
         if(dados.telefone() != null) this.telefone = dados.telefone();
 

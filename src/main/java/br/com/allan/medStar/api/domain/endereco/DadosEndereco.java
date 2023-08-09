@@ -1,4 +1,4 @@
-package br.com.allan.medStar.api.endereco;
+package br.com.allan.medStar.api.domain.endereco;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

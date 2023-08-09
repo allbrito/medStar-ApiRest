@@ -1,4 +1,4 @@
-package br.com.allan.medStar.api.medico;
+package br.com.allan.medStar.api.domain.medico;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,9 @@
 package br.com.allan.medStar.api.controller;
 
-import br.com.allan.medStar.api.medico.*;
-import br.com.allan.medStar.api.paciente.DadosCompletosPaciente;
+import br.com.allan.medStar.api.domain.medico.DadosListagemMedico;
+import br.com.allan.medStar.api.domain.medico.MedicoEntity;
+import br.com.allan.medStar.api.domain.medico.MedicoRepository;
+import br.com.allan.medStar.api.domain.medico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

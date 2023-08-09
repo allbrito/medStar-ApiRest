@@ -1,6 +1,6 @@
-package br.com.allan.medStar.api.paciente;
+package br.com.allan.medStar.api.domain.paciente;
 
-import br.com.allan.medStar.api.endereco.Endereco;
+import br.com.allan.medStar.api.domain.endereco.Endereco;
 
 public record DadosCompletosPaciente(
 

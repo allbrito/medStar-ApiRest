@@ -1,4 +1,4 @@
-package br.com.allan.medStar.api.medico;
+package br.com.allan.medStar.api.domain.medico;
 
 public record DadosListagemMedico(Long id, String nome, String email, String crm, Especialidade especialidade) {
 

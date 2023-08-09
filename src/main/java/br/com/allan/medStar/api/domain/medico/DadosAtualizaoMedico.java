@@ -1,6 +1,6 @@
-package br.com.allan.medStar.api.medico;
+package br.com.allan.medStar.api.domain.medico;
 
-import br.com.allan.medStar.api.endereco.DadosEndereco;
+import br.com.allan.medStar.api.domain.endereco.DadosEndereco;
 
 public record DadosAtualizaoMedico(
 
