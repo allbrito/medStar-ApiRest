@@ -5,20 +5,20 @@ import jakarta.validation.constraints.Pattern;
 
 public record DadosEndereco(
 
-        @NotBlank
-        @Pattern(regexp = "\\d{8}")
+        @NotBlank(message = "{cep.obrigatorio}")
+        @Pattern(regexp = "\\d{8}", message = "{cep.invalido}")
         String cep,
 
-        @NotBlank
+        @NotBlank(message = "{uf.obrigatorio}")
         String uf,
 
-        @NotBlank
+        @NotBlank(message = "{cidade.obrigatoria}")
         String cidade,
 
-        @NotBlank
+        @NotBlank(message = "{bairro.obrigatorio}")
         String bairro,
 
-        @NotBlank
+        @NotBlank(message = "{logradouro.obrigatorio}")
         String logradouro,
 
         String numero,
