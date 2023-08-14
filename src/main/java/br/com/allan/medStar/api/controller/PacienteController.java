@@ -62,32 +62,25 @@ public class PacienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosCompletosPaciente> buscar(@PathVariable Long id){
-        if (!repository.existsById(id)) return ResponseEntity.notFound().build();
-
         var paciente = repository.getReferenceById(id);
+
         return ResponseEntity.ok(new DadosCompletosPaciente(paciente));
     }
 
     @PutMapping(path = "/{id}")
     @Transactional
     public ResponseEntity atualizar(@PathVariable @Valid Long id, @RequestBody @Valid DadosAtualizacaoPaciente dados) {
-        if (repository.existsById(id)) {
-            var paciente = repository.getReferenceById(id);
-            paciente.atualizarInformacoes(dados);
+        var paciente = repository.getReferenceById(id);
+        paciente.atualizarInformacoes(dados);
 
-            return ResponseEntity.ok(new DadosCompletosPaciente(paciente));
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(new DadosCompletosPaciente(paciente));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity Inativar(@PathVariable Long id) {
-        if (repository.existsById(id)) {
-            repository.getReferenceById(id).inativar();
+        repository.getReferenceById(id).inativar();
 
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 }

@@ -63,8 +63,6 @@ public class MedicoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosCompletosMedico> buscar(@PathVariable Long id){
-        if (!repository.existsById(id)) return ResponseEntity.notFound().build();
-
         var medico = repository.getReferenceById(id);
         return ResponseEntity.ok(new DadosCompletosMedico(medico));
     }
@@ -72,23 +70,17 @@ public class MedicoController {
     @PutMapping(path = "/{id}")
     @Transactional
     public ResponseEntity Atualizar(@PathVariable @Valid Long id, @RequestBody @Valid DadosAtualizaoMedico dados) {
-        if (repository.existsById(id)) {
-            var medico = repository.getReferenceById(id);
-            medico.atualizarInformacoes(dados);
+        var medico = repository.getReferenceById(id);
+        medico.atualizarInformacoes(dados);
 
-            return ResponseEntity.ok(new DadosCompletosMedico(medico));
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(new DadosCompletosMedico(medico));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity Inativar(@PathVariable Long id) {
-        if (repository.existsById(id)) {
-            repository.getReferenceById(id).inativar();
+        repository.getReferenceById(id).inativar();
 
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 }
