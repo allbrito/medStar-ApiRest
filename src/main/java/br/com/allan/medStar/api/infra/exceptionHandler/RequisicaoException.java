@@ -1,4 +1,4 @@
-package br.com.allan.medStar.api.exceptionHandler;
+package br.com.allan.medStar.api.infra.exceptionHandler;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
