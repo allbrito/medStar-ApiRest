@@ -4,6 +4,7 @@ import br.com.allan.medStar.api.domain.usuario.UsuarioEntity;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -13,11 +14,13 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
-    private String secret;
+    @Value("${api.security.token.password}")
+    private String password;
 
     public String gerarToken(UsuarioEntity usuario) {
+        System.out.println(password);
         try {
-            var algotithm = Algorithm.HMAC256(secret);
+            var algotithm = Algorithm.HMAC256(password);
             return JWT.create()
                     .withIssuer("API med.Star")
                     .withSubject(usuario.getLogin())
