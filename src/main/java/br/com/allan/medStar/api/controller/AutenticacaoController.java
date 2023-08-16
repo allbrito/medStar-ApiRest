@@ -1,6 +1,9 @@
 package br.com.allan.medStar.api.controller;
 
 import br.com.allan.medStar.api.domain.usuario.DadosAutenticacao;
+import br.com.allan.medStar.api.domain.usuario.UsuarioEntity;
+import br.com.allan.medStar.api.infra.security.DadosTokenJWT;
+import br.com.allan.medStar.api.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +21,15 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity login(@RequestBody @Valid DadosAutenticacao dados) {
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(token);
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var authentication = manager.authenticate(authenticationToken);
+        var tokenJWT = tokenService.gerarToken((UsuarioEntity) authentication.getPrincipal());
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 }
