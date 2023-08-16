@@ -25,9 +25,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recuperToken(HttpServletRequest request) {
         var authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader == null) {
-            throw new RuntimeException("Token não enviado no cabeçalho do Authorization!");
-        }
-        return authorizationHeader.replace("Bearer ", "");
+        return (authorizationHeader != null) ? authorizationHeader.replace("Bearer ", "") : null;
     }
 }
