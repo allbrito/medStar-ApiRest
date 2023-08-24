@@ -1,5 +1,6 @@
 package br.com.allan.medStar.api.infra.exceptionHandler;
 
+import br.com.allan.medStar.api.domain.exception.ValidacaoException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,11 @@ public class RequisicaoException {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity erro400(HttpMessageNotReadableException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity erroValidacao(ValidacaoException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
