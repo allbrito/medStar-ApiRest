@@ -37,6 +37,10 @@ public class AgendamentoService {
         validadores.forEach(v -> v.validar(dados));
 
         var medico = escolherMedico(dados);
+        if (medico == null) {
+            throw new ValidacaoException("Não existe médico disponível nessa hora");
+        }
+
         var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
         var consulta = new ConsultaEntity(null, medico, paciente, dados.data(), null);
 
