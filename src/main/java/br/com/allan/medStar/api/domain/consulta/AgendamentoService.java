@@ -34,7 +34,7 @@ public class AgendamentoService {
             throw new ValidacaoException("Id do médico informado não existe!");
         }
 
-        validadores.forEach(v -> v.validar(dados));
+        validadoresAgendamento.forEach(v -> v.validar(dados));
 
         var medico = escolherMedico(dados);
         if (medico == null) {
