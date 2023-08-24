@@ -23,7 +23,7 @@ public class AgendamentoService {
     private PacienteRepository pacienteRepository;
 
     @Autowired
-    private List<ValidadorAgendamentoConsulta> validadores;
+    private List<ValidadorAgendamentoConsulta> validadoresAgendamento;
 
     public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
         if (!pacienteRepository.existsById(dados.idPaciente())) {
