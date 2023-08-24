@@ -2,9 +2,11 @@ package br.com.allan.medStar.api.domain.consulta.validacoes;
 
 import br.com.allan.medStar.api.domain.consulta.DadosAgendamentoConsulta;
 import br.com.allan.medStar.api.domain.exception.ValidacaoException;
+import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;
 
+@Component
 public class ValidadorHorarioFuncionamento implements ValidadorAgendamentoConsulta {
 
     @Override
