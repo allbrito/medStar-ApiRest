@@ -1,6 +1,7 @@
 package br.com.allan.medStar.api.domain.consulta;
 
-import br.com.allan.medStar.api.domain.consulta.validacoes.ValidadorAgendamentoConsulta;
+import br.com.allan.medStar.api.domain.consulta.validacoes.agendamento.ValidadorAgendamentoConsulta;
+import br.com.allan.medStar.api.domain.consulta.validacoes.cancelamento.ValidadorCancelamentoConsulta;
 import br.com.allan.medStar.api.domain.exception.ValidacaoException;
 import br.com.allan.medStar.api.domain.medico.MedicoEntity;
 import br.com.allan.medStar.api.domain.medico.MedicoRepository;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AgendamentoService {
+public class ConsultaService {
 
     @Autowired
     private ConsultaRepository consultaRepository;
@@ -24,6 +25,9 @@ public class AgendamentoService {
 
     @Autowired
     private List<ValidadorAgendamentoConsulta> validadoresAgendamento;
+
+    @Autowired
+    private List<ValidadorCancelamentoConsulta> validadoresCancelamento;
 
     public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
         if (!pacienteRepository.existsById(dados.idPaciente())) {
@@ -53,6 +57,8 @@ public class AgendamentoService {
             throw new ValidacaoException("Id da consulta informado não existe!");
         }
 
+        validadoresCancelamento.forEach(v -> v.validar(dados));
+
         var consulta = consultaRepository.getReferenceById(dados.idConsulta());
         consulta.cancelar(dados.motivo());
     }
@@ -66,6 +72,6 @@ public class AgendamentoService {
             throw new ValidacaoException("Especialidade é obrigatória quando médico não for especificado!");
         }
 
-        return medicoRepository.medicoLivreData(dados.especialidade(), dados.data());
+        return medicoRepository.medicoAleatorioLivreData(dados.especialidade(), dados.data());
     }
 }

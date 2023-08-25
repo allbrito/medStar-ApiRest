@@ -1,6 +1,6 @@
 package br.com.allan.medStar.api.controller;
 
-import br.com.allan.medStar.api.domain.consulta.AgendamentoService;
+import br.com.allan.medStar.api.domain.consulta.ConsultaService;
 import br.com.allan.medStar.api.domain.consulta.DadosAgendamentoConsulta;
 import br.com.allan.medStar.api.domain.consulta.DadosCancelamentoConsulta;
 import jakarta.validation.Valid;
@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.*;
 public class ConsultaController {
 
     @Autowired
-    private AgendamentoService agendamentoService;
+    private ConsultaService consultaService;
 
     @PostMapping
     @Transactional
     public ResponseEntity agendar(@RequestBody @Valid DadosAgendamentoConsulta dados) {
-        var service = agendamentoService.agendar(dados);
+        var service = consultaService.agendar(dados);
         return ResponseEntity.ok(service);
     }
 
     @DeleteMapping
     @Transactional
     public ResponseEntity cancelar(@RequestBody @Valid DadosCancelamentoConsulta dados) {
-        agendamentoService.cancelar(dados);
+        consultaService.cancelar(dados);
         return ResponseEntity.noContent().build();
     }
 }
