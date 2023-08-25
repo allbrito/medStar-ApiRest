@@ -22,7 +22,7 @@ public class SecurityConfigurations {
     private SecurityFilter securityFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { //terminar esse método ainda
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
