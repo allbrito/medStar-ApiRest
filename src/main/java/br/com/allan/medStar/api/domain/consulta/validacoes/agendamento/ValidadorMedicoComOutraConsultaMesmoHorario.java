@@ -1,4 +1,4 @@
-package br.com.allan.medStar.api.domain.consulta.validacoes;
+package br.com.allan.medStar.api.domain.consulta.validacoes.agendamento;
 
 import br.com.allan.medStar.api.domain.consulta.ConsultaRepository;
 import br.com.allan.medStar.api.domain.consulta.DadosAgendamentoConsulta;
@@ -14,7 +14,7 @@ public class ValidadorMedicoComOutraConsultaMesmoHorario implements ValidadorAge
 
     @Override
     public void validar(DadosAgendamentoConsulta dados) {
-        var medicoConsulta = repository.existsByMedicoIdAndData(dados.idMedico(), dados.data());
+        var medicoConsulta = repository.existsByMedicoIdAndDataAndMotivoCancelamentoIsNull(dados.idMedico(), dados.data());
         if (medicoConsulta) {
             throw new ValidacaoException("Medico já possui uma consulta nesse horário");
         }
